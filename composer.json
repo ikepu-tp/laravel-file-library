@@ -1,0 +1,36 @@
+{
+	"name": "ikepu-tp/laravel-file-library",
+	"description": "",
+	"type": "library",
+	"keywords": [
+		"laravel"
+	],
+	"homepage": "https://ikepu-tp.com",
+	"support": {
+		"issues": "https://github.com/ikepu-tp/laravel-file-library/issues",
+		"source": "https://github.com/ikepu-tp/laravel-file-library"
+	},
+	"require": {
+		"php": "^8.2",
+		"laravel/framework": "^10.8"
+	},
+	"license": "MIT",
+	"autoload": {
+		"psr-4": {
+			"ikepu_tp\\FileLibrary\\": "./src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "ikepu-tp",
+			"email": "program@ikepu-tp.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"ikepu_tp\\FileLibrary\\FileLibraryServiceProvider"
+			]
+		}
+	}
+}
