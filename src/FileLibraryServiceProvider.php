@@ -77,6 +77,6 @@ class FileLibraryServiceProvider extends ServiceProvider
      */
     protected function defineRoutes()
     {
-        $this->loadRoutesFrom(__DIR__ . "/routes/web.php");
+        $this->loadRoutesFrom(__DIR__ . "/routes/route.php");
     }
 }
