@@ -13,7 +13,7 @@ class FileLibraryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/laravel-file-library.php', 'laravel-file-library');
+        $this->mergeConfigFrom(__DIR__ . '/config/file-library.php', 'file-library');
     }
 
     /**
@@ -37,7 +37,7 @@ class FileLibraryServiceProvider extends ServiceProvider
         if (!$this->app->runningInConsole()) return;
 
         $this->publishes([
-            __DIR__ . '/config/laravel-file-library.php' => base_path('config/laravel-file-library.php'),
+            __DIR__ . '/config/file-library.php' => base_path('config/file-library.php'),
         ], 'FileLibrary-config');
 
 
