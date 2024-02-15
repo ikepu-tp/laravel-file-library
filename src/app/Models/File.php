@@ -26,4 +26,9 @@ class File extends Models
         'type' => 'string',
         'path' => 'string',
     ];
+
+    public function getRouteKey()
+    {
+        return $this->fileId;
+    }
 }
