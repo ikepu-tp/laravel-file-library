@@ -24,7 +24,7 @@ class FileController extends BaseController
      */
     public function create(FileRequest $fileRequest)
     {
-        //
+        return view("FileLibrary::lib.create");
     }
 
     /**
