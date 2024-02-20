@@ -3,6 +3,7 @@
   <div>
     <h2>ファイルのアップロード</h2>
     <form action="{{ route('file-library.store') }}" method="post">
+      @csrf
       <button type="button" class="btn btn-outline-secondary" onclick="addItem()">ファイル追加</button>
       <div id="__upload-list" class="list-group my-2">
         <div class="list-group-item">
