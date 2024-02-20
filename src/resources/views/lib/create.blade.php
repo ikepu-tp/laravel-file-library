@@ -2,7 +2,12 @@
 @section('contents')
   <div>
     <h2>ファイルのアップロード</h2>
-    <form action="{{ route('file-library.store') }}" method="post">
+    @if (session('status'))
+      <div class="alert alert-info">
+        {{ session('status') }}
+      </div>
+    @endif
+    <form action="{{ route('file-library.store') }}" method="post" enctype="multipart/form-data">
       @csrf
       <button type="button" class="btn btn-outline-secondary" onclick="addItem()">ファイル追加</button>
       <div id="__upload-list" class="list-group my-2">

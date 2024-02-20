@@ -67,7 +67,7 @@ class FileController extends BaseController
         if ($upload_failed) throw new Exception("Upload failed.");
 
         if ($fileRequest->expectsJson()) return $saved_files;
-        return back()->with("status", "File saved.");
+        return back()->with("status", "Files saved.");
     }
 
     /**
