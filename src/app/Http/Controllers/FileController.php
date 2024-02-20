@@ -75,7 +75,12 @@ class FileController extends BaseController
      */
     public function show(FileRequest $fileRequest, File $file)
     {
-        //
+        return response()->file(
+            Storage::path($file->path), //ファイルパス
+            [ //headers
+                "Content-Type" => $file->type,
+            ]
+        );
     }
 
     /**

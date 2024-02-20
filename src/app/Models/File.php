@@ -31,4 +31,9 @@ class File extends Models
     {
         return $this->fileId;
     }
+
+    public function getRouteKeyName()
+    {
+        return 'fileId';
+    }
 }

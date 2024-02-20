@@ -5,11 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 $middleware = config("file-library.middleware");
 if (is_string($middleware)) $middleware = [$middleware];
-Route::group([
-    "middleware" => array_merge(
+Route::scopeBindings()
+    ->middleware(array_merge(
         ["auth:" . config("file-library.guard")],
         $middleware,
-    ),
-], function () {
-    Route::resource("file/lib", FileController::class)->names("file-library")->except(config("file-library.route_except", []));
-});
+    ))
+    ->group(function () {
+        Route::resource("file/lib", FileController::class)
+            ->names("file-library")
+            ->parameters(["lib" => "file"])
+            ->except(config("file-library.route_except", []));
+    });
