@@ -15,12 +15,24 @@
             <div class="card-header">
               {{ $file->name }}
             </div>
-            <div class="card-body">
+            <a href="{{ route('file-library.show', ['file' => $file->fileId]) }}" class="card-body" target="_blank">
               <iframe src="{{ route('file-library.show', ['file' => $file->fileId]) }}" frameborder="0"
                 class="border-0"></iframe>
-            </div>
-            <div class="card-footer text-end">
-              <a href="{{ route('file-library.edit', ['file' => $file]) }}" class="btn btn-success">編集</a>
+            </a>
+            <div class="card-footer">
+              <div class="row justify-content-end">
+                <div class="col-auto text-secondary" style="font-size: .75em;">
+                  <div class="text-end">
+                    作成日時：{{ $file->created_at->format('Y/m/d H:i') }}
+                  </div>
+                  <div class="text-end">
+                    更新日時：{{ $file->updated_at->format('Y/m/d H:i') }}
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <a href="{{ route('file-library.edit', ['file' => $file]) }}" class="btn btn-success">編集</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
