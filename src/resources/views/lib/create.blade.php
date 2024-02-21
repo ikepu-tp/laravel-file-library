@@ -1,6 +1,9 @@
 @extends('SecureAuth::layout')
 @section('contents')
-  <div>
+  <div class="my-2">
+    <div class="mb-3">
+      <a href="{{ route('file-library.index') }}">ファイル一覧</a>
+    </div>
     <h2>ファイルのアップロード</h2>
     @if (session('status'))
       <div class="alert alert-info">

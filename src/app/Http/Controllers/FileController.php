@@ -17,6 +17,15 @@ class FileController extends BaseController
      */
     public function index(FileRequest $fileRequest)
     {
+        $guard = config("file-library.guard");
+        /** @var \Illuminate\Foundation\Auth\User */
+        $user = $fileRequest->user($guard);
+        $user_id = $user->getKey();
+        return view("FileLibrary::lib.index", [
+            "files" => File::query()
+                ->where("user_id", $user_id)
+                ->paginate($fileRequest->query("per", 10))
+        ]);
     }
 
     /**
@@ -33,11 +42,11 @@ class FileController extends BaseController
     public function store(FileRequest $fileRequest)
     {
         $guard = config("file-library.guard");
-        /** @var bool */
-        $upload_failed = false;
         /** @var \Illuminate\Foundation\Auth\User */
         $user = $fileRequest->user($guard);
         $user_id = $user->getKey();
+        /** @var bool */
+        $upload_failed = false;
         /** @var \Illuminate\Http\UploadedFile[] */
         $files = $fileRequest->file("files", []);
         /** @var string[] */
