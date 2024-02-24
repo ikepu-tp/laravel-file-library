@@ -13,7 +13,9 @@
         <div class="col-auto">
           <div class="card my-2">
             <div class="card-header">
-              {{ $file->name }}
+              <a href="{{ route('file-library.show', ['file' => $file->fileId]) }}">
+                {{ $file->name }}
+              </a>
             </div>
             <a href="{{ route('file-library.show', ['file' => $file->fileId]) }}" class="card-body" target="_blank">
               <iframe src="{{ route('file-library.show', ['file' => $file->fileId]) }}" frameborder="0"
