@@ -97,7 +97,9 @@ class FileController extends BaseController
      */
     public function edit(FileRequest $fileRequest, File $file)
     {
-        //
+        return view("FileLibrary::lib.edit", [
+            "file" => $file,
+        ]);
     }
 
     /**
@@ -105,7 +107,12 @@ class FileController extends BaseController
      */
     public function update(FileRequest $fileRequest, File $file)
     {
-        //
+        $file->fill($fileRequest->only(["name"]));
+
+        if (!$file->save()) throw new Exception("Failed to save file.");
+
+        if ($fileRequest->expectsJson()) return $file;
+        return back()->with("status", "File updated.");
     }
 
     /**
@@ -113,6 +120,9 @@ class FileController extends BaseController
      */
     public function destroy(FileRequest $fileRequest, File $file)
     {
-        //
+        if (!$file->delete()) throw new Exception("Failed to delete file.");
+
+        if ($fileRequest->expectsJson()) return response()->noContent();
+        return back()->with("status", "File deleted.");
     }
 }

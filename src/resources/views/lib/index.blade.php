@@ -13,7 +13,7 @@
         <div class="col-auto">
           <div class="card my-2">
             <div class="card-header">
-              <a href="{{ route('file-library.show', ['file' => $file->fileId]) }}">
+              <a href="{{ route('file-library.show', ['file' => $file->fileId]) }}" target="_blank">
                 {{ $file->name }}
               </a>
             </div>

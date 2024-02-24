@@ -27,6 +27,9 @@ class FileRequest extends FormRequest
             "names" => ["array"],
             "names.*" => ["string", "required", "max:250"],
         ];
+        if ($this->routeIs("*.update")) return [
+            "name" => ["string", "required", "max:250"],
+        ];
         return [];
     }
 

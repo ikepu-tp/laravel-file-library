@@ -17,8 +17,8 @@
         <div class="list-group-item">
           <div class="input-group">
             <input type="file" name="files[]" class="form-control" title="Select file." required>
-            <input type="text" name="names[]" id="" class="form-control" placeholder="file name"
-              title="Type file name." required>
+            <input type="text" name="names[]" class="form-control" placeholder="file name" title="Type file name."
+              required>
             <button type="button" class="btn btn-danger" onclick="removeItem(this)">削除</button>
           </div>
         </div>
