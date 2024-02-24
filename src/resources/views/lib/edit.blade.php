@@ -32,7 +32,15 @@
         <input type="text" name="name" class="form-control" placeholder="file name" title="Type file name."
           value="{{ $file->name }}" required>
       </div>
-      <button type="submit" class="btn btn-primary mt-2">Update</button>
+      <div class="mt-2">
+        <button type="submit" class="btn btn-primary">Update</button>
+      </div>
+    </form>
+
+    <form action="{{ route('file-library.destroy', ['file' => $file]) }}" method="post">
+      @csrf
+      @method('delete')
+      <button type="submit" class="btn btn-link text-danger">Remove</button>
     </form>
 
   </div>

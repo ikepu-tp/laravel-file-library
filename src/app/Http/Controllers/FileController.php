@@ -121,8 +121,12 @@ class FileController extends BaseController
     public function destroy(FileRequest $fileRequest, File $file)
     {
         if (!$file->delete()) throw new Exception("Failed to delete file.");
+        if (!Storage::delete($file->path)) {
+            $file->restore();
+            throw new Exception("Failed to delete file.");
+        }
 
         if ($fileRequest->expectsJson()) return response()->noContent();
-        return back()->with("status", "File deleted.");
+        return redirect()->route("file-library.index")->with("status", "File deleted.");
     }
 }
