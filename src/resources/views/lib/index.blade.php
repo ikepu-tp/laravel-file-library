@@ -5,7 +5,9 @@
   <div class="contaier my-2">
     <div class="row justify-content-end">
       <div class="col-auto mb-2">
-        <a href="{{ route('file-library.create') }}" class="btn btn-primary">アップロード</a>
+        <a href="{{ route('file-library.create') }}" class="btn btn-primary">
+          {{ __('FileLibrary::file-library.upload') }}
+        </a>
       </div>
     </div>
     <div class="row">
@@ -25,14 +27,16 @@
               <div class="row justify-content-end">
                 <div class="col-auto text-secondary" style="font-size: .75em;">
                   <div class="text-end">
-                    作成日時：{{ $file->created_at->format('Y/m/d H:i') }}
+                    {{ __('FileLibrary::file-library.created_at') }}：{{ $file->created_at->format('Y/m/d H:i') }}
                   </div>
                   <div class="text-end">
-                    更新日時：{{ $file->updated_at->format('Y/m/d H:i') }}
+                    {{ __('FileLibrary::file-library.updated_at') }}：{{ $file->updated_at->format('Y/m/d H:i') }}
                   </div>
                 </div>
                 <div class="col-auto">
-                  <a href="{{ route('file-library.edit', ['file' => $file]) }}" class="btn btn-success">編集</a>
+                  <a href="{{ route('file-library.edit', ['file' => $file]) }}" class="btn btn-success">
+                    {{ __('FileLibrary::file-library.edit') }}
+                  </a>
                 </div>
               </div>
             </div>

@@ -5,10 +5,14 @@
   <div class="my-2">
 
     <div class="mb-3">
-      <a href="{{ route('file-library.index') }}">ファイル一覧</a>
+      <a href="{{ route('file-library.index') }}">
+        {{ __('FileLibrary::file-library.list') }}
+      </a>
     </div>
 
-    <h2>ファイルの編集</h2>
+    <h2>
+      {{ __('FileLibrary::file-library.edit_file') }}
+    </h2>
     @if (session('status'))
       <div class="alert alert-info">
         {{ session('status') }}
@@ -28,19 +32,19 @@
       @csrf
       @method('put')
       <div class="input-group my-2">
-        <div class="input-group-text">ファイル名</div>
+        <div class="input-group-text">{{ __('FileLibrary::file-library.file_name') }}</div>
         <input type="text" name="name" class="form-control" placeholder="file name" title="Type file name."
           value="{{ $file->name }}" required>
       </div>
       <div class="mt-2">
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">{{ __('FileLibrary::file-library.update') }}</button>
       </div>
     </form>
 
     <form action="{{ route('file-library.destroy', ['file' => $file]) }}" method="post">
       @csrf
       @method('delete')
-      <button type="submit" class="btn btn-link text-danger">Remove</button>
+      <button type="submit" class="btn btn-link text-danger">{{ __('FileLibrary::file-library.remove') }}</button>
     </form>
 
   </div>

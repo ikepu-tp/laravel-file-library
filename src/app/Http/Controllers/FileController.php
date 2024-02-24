@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller as BaseController;
 use Exception;
 use ikepu_tp\FileLibrary\app\Http\Requests\FileRequest;
 use ikepu_tp\FileLibrary\app\Models\File;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -73,10 +72,10 @@ class FileController extends BaseController
             }
         }
 
-        if ($upload_failed) throw new Exception("Upload failed.");
+        if ($upload_failed) throw new Exception(__("FileLibrary::file-library.failed_upload_files"));
 
         if ($fileRequest->expectsJson()) return $saved_files;
-        return back()->with("status", "Files saved.");
+        return back()->with("status", __("FileLibrary::file-library.files_saved"));
     }
 
     /**
@@ -109,10 +108,10 @@ class FileController extends BaseController
     {
         $file->fill($fileRequest->only(["name"]));
 
-        if (!$file->save()) throw new Exception("Failed to save file.");
+        if (!$file->save()) throw new Exception(__("FileLibrary::file-library.failed_save_file"));
 
         if ($fileRequest->expectsJson()) return $file;
-        return back()->with("status", "File updated.");
+        return back()->with("status", __("FileLibrary::file-library.file_updated"));
     }
 
     /**
@@ -120,13 +119,13 @@ class FileController extends BaseController
      */
     public function destroy(FileRequest $fileRequest, File $file)
     {
-        if (!$file->delete()) throw new Exception("Failed to delete file.");
+        if (!$file->delete()) throw new Exception(__("FileLibrary::file-library.failed_delete_file"));
         if (!Storage::delete($file->path)) {
             $file->restore();
-            throw new Exception("Failed to delete file.");
+            throw new Exception(__("FileLibrary::file-library.failed_delete_file"));
         }
 
         if ($fileRequest->expectsJson()) return response()->noContent();
-        return redirect()->route("file-library.index")->with("status", "File deleted.");
+        return redirect()->route("file-library.index")->with("status", __("FileLibrary::file-library.file_deleted"));
     }
 }
