@@ -1,4 +1,4 @@
-@extends('SecureAuth::layout')
+@extends('FileLibrary::layout')
 @section('contents')
   <div class="my-2">
     <div class="mb-3">

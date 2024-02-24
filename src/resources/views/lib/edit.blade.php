@@ -1,6 +1,6 @@
 @props(['file' => []])
 
-@extends('SecureAuth::layout')
+@extends('FileLibrary::layout')
 @section('contents')
   <div class="my-2">
 

@@ -1,6 +1,6 @@
 @props(['files' => []])
 
-@extends('SecureAuth::layout')
+@extends('FileLibrary::layout')
 @section('contents')
   <div class="contaier my-2">
     <div class="row justify-content-end">
