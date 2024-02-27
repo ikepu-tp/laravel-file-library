@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @property File $resource
  */
-class Resource extends JsonResource
+class FileLibraryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
