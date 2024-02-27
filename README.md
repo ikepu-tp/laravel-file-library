@@ -52,6 +52,64 @@ PUT http://your-project.com/file/lib/{fileId}
 | ---- | ------ | --------------- | -------- |
 | name | string | max length: 250 | Y        |
 
+## API Documentation
+
+### FileLibraryController
+
+#### FileLibraryResource
+
+```json
+{
+  "fileIid": "string",
+  "name": "string",
+  "path": "string",
+  "url": "string",
+  "mime_type": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
+
+#### index
+
+Display a list of files in the file library.
+
+```bash
+GET http://your-project.com/file/lib
+```
+
+#### store
+
+Upload a file.
+
+```bash
+POST http://your-project.com/file/lib
+```
+
+#### show
+
+Display details of a specific file.
+
+```bash
+GET http://your-project.com/file/lib/{fileId}
+```
+
+#### update
+
+Update a specific file.
+
+```bash
+PUT http://your-project.com/file/lib/{fileId}
+```
+
+#### destroy
+
+Delete a specific file.
+
+```bash
+DELETE http://your-project.com/file/lib/{fileId}
+```
+
 ## Contributing
 
 We welcome contributions to the project! You can get involved through the following ways:
