@@ -60,7 +60,7 @@ PUT http://your-project.com/file/lib/{fileId}
 
 ```json
 {
-  "fileIid": "string",
+  "fileId": "string",
   "name": "string",
   "path": "string",
   "url": "string",
