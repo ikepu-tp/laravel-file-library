@@ -5,6 +5,8 @@ namespace ikepu_tp\FileLibrary\app\Http\Controllers;
 use App\Http\Controllers\Controller as BaseController;
 use Exception;
 use ikepu_tp\FileLibrary\app\Http\Requests\FileRequest;
+use ikepu_tp\FileLibrary\app\Http\Resources\FileLibraryResource;
+use ikepu_tp\FileLibrary\app\Http\Resources\Resource;
 use ikepu_tp\FileLibrary\app\Models\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -74,7 +76,7 @@ class FileController extends BaseController
 
         if ($upload_failed) throw new Exception(__("FileLibrary::file-library.failed_upload_files"));
 
-        if ($fileRequest->expectsJson()) return $saved_files;
+        if ($fileRequest->expectsJson()) return Resource::create(FileLibraryResource::collection($saved_files));
         return back()->with("status", __("FileLibrary::file-library.files_saved"));
     }
 
@@ -110,7 +112,7 @@ class FileController extends BaseController
 
         if (!$file->save()) throw new Exception(__("FileLibrary::file-library.failed_save_file"));
 
-        if ($fileRequest->expectsJson()) return $file;
+        if ($fileRequest->expectsJson()) return Resource::success(new FileLibraryResource($file));
         return back()->with("status", __("FileLibrary::file-library.file_updated"));
     }
 
