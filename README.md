@@ -52,6 +52,125 @@ PUT http://your-project.com/file/lib/{fileId}
 | ---- | ------ | --------------- | -------- |
 | name | string | max length: 250 | Y        |
 
+## API Documentation
+
+### FileLibraryController
+
+#### FileLibraryResource
+
+```json
+{
+  "fileId": "string",
+  "name": "string",
+  "url": "string",
+  "mime_type": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
+
+#### index
+
+Display a list of files in the file library.
+
+```bash
+GET http://your-project.com/file/lib
+```
+
+##### index Sample
+
+```json:Response
+{
+    "status":{
+        "result":true,
+        "code":200,
+    },
+    "payloads":{
+        "meta": {
+            "currentPage": 1,
+            "lastPage": 1,
+            "length": 1,
+            "getLength": 0,
+            "per":1,
+        },
+        "items":[
+                {
+                    "fileId": "uuid",
+                    "name": "file name",
+                    "url": "http://your-project.com/file/lib/uuid",
+                    "mime_type": "application/json",
+                    "created_at": "2024-01-01T00:00:00Z",
+                    "updated_at": "2024-01-01T00:00:00Z"
+                }
+        ]
+    }
+}
+```
+
+#### store
+
+Upload a file.
+
+```bash
+POST http://your-project.com/file/lib
+```
+
+##### store Sample
+
+```json:Request
+{
+    "files": [
+        "FILE BINARY",
+    ],
+    "names":[
+        "file name",
+    ]
+}
+```
+
+```json:Response
+{
+    "status":{
+        "result":true,
+        "code":201,
+    },
+    "payloads": [
+        {
+            "fileId": "uuid",
+            "name": "file name",
+            "url": "http://your-project.com/file/lib/uuid",
+            "mime_type": "application/json",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    ]
+}
+```
+
+#### show
+
+Display details of a specific file.
+
+```bash
+GET http://your-project.com/file/lib/{fileId}
+```
+
+#### update
+
+Update a specific file.
+
+```bash
+PUT http://your-project.com/file/lib/{fileId}
+```
+
+#### destroy
+
+Delete a specific file.
+
+```bash
+DELETE http://your-project.com/file/lib/{fileId}
+```
+
 ## Contributing
 
 We welcome contributions to the project! You can get involved through the following ways:

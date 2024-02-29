@@ -2,6 +2,8 @@
 
 namespace ikepu_tp\FileLibrary;
 
+use ikepu_tp\FileLibrary\app\Models\File;
+use ikepu_tp\FileLibrary\app\Observers\FileObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
@@ -28,6 +30,8 @@ class FileLibraryServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . "/resources/views", "FileLibrary");
         Paginator::useBootstrap();
         Blade::componentNamespace("ikepu_tp\\resources\\views\\components", "FileLibrary");
+
+        File::observe(FileObserver::class);
     }
 
     /**
