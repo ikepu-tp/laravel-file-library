@@ -61,17 +61,20 @@ class FileController extends BaseController
         foreach ($files as $idx => $upfile) {
             $file_model = new File();
             $fileId = Str::uuid();
-            $path = config("file-library.path", "");
             $name = $fileId . "." . $upfile->getClientOriginalExtension();;
+            $path = config("file-library.path", "");
             $file_model->fill([
                 "fileId" => $fileId,
                 "user_id" => $user_id,
                 "guard" => $guard,
                 "name" => isset($names[$idx]) ? $names[$idx] : "",
                 "type" => $upfile->getClientMimeType(),
-                "path" => "{$path}/{$name}",
+                "path" => "$path/$name",
             ]);
-            if (!$upfile->storeAs($path, $name) || !$file_model->save()) {
+            if (
+                !$upfile->storeAs($path, $name, config("file-library.disk")) ||
+                !$file_model->save()
+            ) {
                 $upload_failed = true;
             } else {
                 $saved_files[] = $file_model;

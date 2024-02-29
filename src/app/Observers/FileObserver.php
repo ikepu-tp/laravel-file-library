@@ -29,7 +29,7 @@ class FileObserver
      */
     public function deleted(File $file): void
     {
-        if (!Storage::delete($file->path)) {
+        if (!Storage::disk(config("file-library.disk"))->delete($file->path)) {
             $file->restore();
             throw new Exception(__("FileLibrary::file-library.failed_delete_file"));
         }
