@@ -22,10 +22,14 @@ class FileController extends BaseController
         /** @var \Illuminate\Foundation\Auth\User */
         $user = $fileRequest->user($guard);
         $user_id = $user->getKey();
+        $files = File::query()
+            ->where([
+                ["user_id", $user_id],
+                ["guard", $guard],
+            ]);
+        if ($fileRequest->expectsJson()) return Resource::pagination($files, FileLibraryResource::class);
         return view("FileLibrary::lib.index", [
-            "files" => File::query()
-                ->where("user_id", $user_id)
-                ->paginate($fileRequest->query("per", 10))
+            "files" => $files->paginate($fileRequest->query("per", 10)),
         ]);
     }
 
@@ -85,6 +89,7 @@ class FileController extends BaseController
      */
     public function show(FileRequest $fileRequest, File $file)
     {
+        if ($fileRequest->expectsJson()) return Resource::success(new FileLibraryResource($file));
         return response()->file(
             Storage::path($file->path), //ファイルパス
             [ //headers

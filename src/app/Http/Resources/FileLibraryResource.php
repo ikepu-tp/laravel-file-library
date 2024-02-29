@@ -34,7 +34,6 @@ class FileLibraryResource extends JsonResource
          * {
          *   "fileId": "string",
          *   "name": "string",
-         *   "path": "string",
          *   "url": "string",
          *   "mime_type": "string",
          *   "created_at": "string",
@@ -44,7 +43,6 @@ class FileLibraryResource extends JsonResource
         if (!$this->resource) return [
             "fileId" => "",
             "name" => "",
-            "path" => "",
             "url" => "",
             "mime_type" => "",
             "created_at" => "",
@@ -54,7 +52,6 @@ class FileLibraryResource extends JsonResource
         return [
             "fileId" => $this->resource->fileId,
             "name" => $this->resource->name,
-            "path" => $this->resource->path,
             "url" => route("file-library.show", ["file" => $this->resource]),
             "mime_type" => $this->resource->type,
             "created_at" => $this->resource->created_at,

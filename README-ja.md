@@ -52,6 +52,114 @@ PUT http://your-project.com/file/lib/{fileId}
 | ---- | ------ | --------------- | -------- |
 | name | string | max length: 250 | Y        |
 
+## API Documentation
+
+### ファイルライブラリ
+
+#### ファイルライブラリリソース
+
+```json
+{
+  "fileId": "string",
+  "name": "string",
+  "url": "string",
+  "mime_type": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
+
+#### 一覧
+
+ファイルライブラリのファイル一覧を取得します。
+
+```bash
+GET http://your-project.com/file/lib
+```
+
+##### 一覧サンプル
+
+```json:Response
+{
+    "status":{
+        "result":true,
+        "code":200,
+    },
+    "payloads":{
+        "meta": {
+            "currentPage": 1,
+            "lastPage": 1,
+            "length": 1,
+            "getLength": 0,
+            "per":1,
+        },
+        "items":[
+                {
+                    "fileId": "uuid",
+                    "name": "file name",
+                    "url": "http://your-project.com/file/lib/uuid",
+                    "mime_type": "application/json",
+                    "created_at": "2024-01-01T00:00:00Z",
+                    "updated_at": "2024-01-01T00:00:00Z"
+                }
+        ]
+    }
+}
+```
+
+#### 登録
+
+ファイルをアップロードします。
+
+```bash
+POST http://your-project.com/file/lib
+```
+
+##### 登録サンプル
+
+```json:Response
+{
+    "status":{
+        "result":true,
+        "code":201,
+    },
+    "payloads": [
+        {
+            "fileId": "uuid",
+            "name": "file name",
+            "url": "http://your-project.com/file/lib/uuid",
+            "mime_type": "application/json",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    ]
+}
+```
+
+#### 詳細
+
+特定のファイルライブラリの詳細を取得します。
+
+```bash
+GET http://your-project.com/file/lib/{fileId}
+```
+
+#### 更新
+
+特定のファイルライブラリの登録情報を変更します。
+
+```bash
+PUT http://your-project.com/file/lib/{fileId}
+```
+
+#### 削除
+
+特定のファイルライブラリを削除します。
+
+```bash
+DELETE http://your-project.com/file/lib/{fileId}
+```
+
 ## 貢献
 
 貢献は歓迎します！以下の方法で参加できます。

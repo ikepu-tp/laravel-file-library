@@ -62,7 +62,6 @@ PUT http://your-project.com/file/lib/{fileId}
 {
   "fileId": "string",
   "name": "string",
-  "path": "string",
   "url": "string",
   "mime_type": "string",
   "created_at": "string",
@@ -78,12 +77,74 @@ Display a list of files in the file library.
 GET http://your-project.com/file/lib
 ```
 
+##### index Sample
+
+```json:Response
+{
+    "status":{
+        "result":true,
+        "code":200,
+    },
+    "payloads":{
+        "meta": {
+            "currentPage": 1,
+            "lastPage": 1,
+            "length": 1,
+            "getLength": 0,
+            "per":1,
+        },
+        "items":[
+                {
+                    "fileId": "uuid",
+                    "name": "file name",
+                    "url": "http://your-project.com/file/lib/uuid",
+                    "mime_type": "application/json",
+                    "created_at": "2024-01-01T00:00:00Z",
+                    "updated_at": "2024-01-01T00:00:00Z"
+                }
+        ]
+    }
+}
+```
+
 #### store
 
 Upload a file.
 
 ```bash
 POST http://your-project.com/file/lib
+```
+
+##### store Sample
+
+```json:Request
+{
+    "files": [
+        "FILE BINARY",
+    ],
+    "names":[
+        "file name",
+    ]
+}
+```
+
+```json:Response
+{
+    "status":{
+        "result":true,
+        "code":201,
+    },
+    "payloads": [
+        {
+            "fileId": "uuid",
+            "name": "file name",
+            "url": "http://your-project.com/file/lib/uuid",
+            "mime_type": "application/json",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    ]
+}
 ```
 
 #### show
