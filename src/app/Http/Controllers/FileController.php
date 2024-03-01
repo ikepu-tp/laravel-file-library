@@ -10,7 +10,6 @@ use ikepu_tp\FileLibrary\app\Http\Resources\Resource;
 use ikepu_tp\FileLibrary\app\Models\File;
 use ikepu_tp\FileLibrary\app\Services\FileLibraryService;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class FileController extends BaseController
 {
