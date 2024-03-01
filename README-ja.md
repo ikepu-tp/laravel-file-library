@@ -33,6 +33,8 @@ php artisan vendor:publish --provider="ikepu_tp\FileLibrary\FileLibraryServicePr
 
 #### ファイルのアップロード
 
+##### 標準のルート
+
 ```bash
 POST http://your-project.com/file/lib
 ```
@@ -41,6 +43,25 @@ POST http://your-project.com/file/lib
 | ----- | ------------------ | --------------- | -------- |
 | files | Array<int, File>   |                 | Y        |
 | names | Array<int, string> | max length: 250 | Y        |
+
+##### オリジナルのルート
+
+```php:UploadFileController
+class FileController extends Controller
+{
+    public function store(Request $request)
+    {
+        $guard = config("file-library.guard");
+        $files = \ikepu_tp\FileLibrary\app\Services\FileLibraryService::upload(
+            $guard, 
+            $request->file("files", []), 
+            $request->input("names", [])
+        );
+
+        return back()->with("status", "アップロードしました。");
+    }
+}
+```
 
 #### ファイルの編集
 
