@@ -8,6 +8,7 @@ use ikepu_tp\FileLibrary\app\Http\Requests\FileRequest;
 use ikepu_tp\FileLibrary\app\Http\Resources\FileLibraryResource;
 use ikepu_tp\FileLibrary\app\Http\Resources\Resource;
 use ikepu_tp\FileLibrary\app\Models\File;
+use ikepu_tp\FileLibrary\app\Services\FileLibraryService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -47,43 +48,9 @@ class FileController extends BaseController
     public function store(FileRequest $fileRequest)
     {
         $guard = config("file-library.guard");
-        /** @var \Illuminate\Foundation\Auth\User */
-        $user = $fileRequest->user($guard);
-        $user_id = $user->getKey();
-        /** @var bool */
-        $upload_failed = false;
-        /** @var \Illuminate\Http\UploadedFile[] */
-        $files = $fileRequest->file("files", []);
-        /** @var string[] */
-        $names = $fileRequest->input("names", []);
-        /** @var File[] */
-        $saved_files = [];
-        foreach ($files as $idx => $upfile) {
-            $file_model = new File();
-            $fileId = Str::uuid();
-            $name = $fileId . "." . $upfile->getClientOriginalExtension();;
-            $path = config("file-library.path", "");
-            $file_model->fill([
-                "fileId" => $fileId,
-                "user_id" => $user_id,
-                "guard" => $guard,
-                "name" => isset($names[$idx]) ? $names[$idx] : "",
-                "type" => $upfile->getClientMimeType(),
-                "path" => "$path/$name",
-            ]);
-            if (
-                !$upfile->storeAs($path, $name, config("file-library.disk")) ||
-                !$file_model->save()
-            ) {
-                $upload_failed = true;
-            } else {
-                $saved_files[] = $file_model;
-            }
-        }
+        $files = FileLibraryService::upload($guard, $fileRequest->file("files", []), $fileRequest->input("names", []));
 
-        if ($upload_failed) throw new Exception(__("FileLibrary::file-library.failed_upload_files"));
-
-        if ($fileRequest->expectsJson()) return Resource::create(FileLibraryResource::collection($saved_files));
+        if ($fileRequest->expectsJson()) return Resource::create(FileLibraryResource::collection($files));
         return back()->with("status", __("FileLibrary::file-library.files_saved"));
     }
 
@@ -116,7 +83,7 @@ class FileController extends BaseController
      */
     public function update(FileRequest $fileRequest, File $file)
     {
-        $file->fill($fileRequest->only(["name"]));
+        $file->fill($fileRequest->safe()->only(["name"]));
 
         if (!$file->save()) throw new Exception(__("FileLibrary::file-library.failed_save_file"));
 
