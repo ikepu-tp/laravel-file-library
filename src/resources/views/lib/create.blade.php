@@ -38,7 +38,7 @@
   </div>
   <script>
     function removeItem(e) {
-      if (!confirm({{ __('FileLibrary::file-library.confirming_remove_file') }})) return;
+      if (!confirm("{{ __('FileLibrary::file-library.confirming_remove_file') }}")) return;
       e.parentNode.parentNode.remove();
     }
 
