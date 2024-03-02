@@ -15,4 +15,5 @@ Route::scopeBindings()
             ->names("file-library")
             ->parameters(["lib" => "file"])
             ->except(config("file-library.route_except", []));
+        Route::get("file/lib/{file}/download", [FileController::class, "download"])->name("file-library.download");
     });

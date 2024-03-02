@@ -68,6 +68,31 @@ class FileController extends BaseController
     }
 
     /**
+     * ダウンロード
+     *
+     * @param FileRequest $fileRequest
+     * @param File $file
+     * @return void
+     */
+    public function download(FileRequest $fileRequest, File $file)
+    {
+        $path = Storage::path($file->path);
+        $name = $file->name;
+        $info = pathinfo($path);
+        $ext = $info["extension"];
+        $splited_name = explode(".", $name);
+        if ($splited_name[count($splited_name) - 1] !== $ext) $name .= ".$ext";
+
+        return response()->download(
+            $path, //ファイルパス
+            $name, //ダウンロード時のファイル名
+            [ //headers
+                "Content-Type" => $file->type,
+            ]
+        );
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(FileRequest $fileRequest, File $file)
